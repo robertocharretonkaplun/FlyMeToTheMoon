@@ -5,6 +5,7 @@ using UnityEngine;
 public class SpriteFloat : MonoBehaviour
 {
     public float moveSpeed = 1f;
+    public float horizontalFall = -1;
     public Rigidbody2D rigidBody;
     Vector2 movement;
 
@@ -15,8 +16,8 @@ public class SpriteFloat : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        movement.x = -1;
+    {        
+        movement.x = horizontalFall;
         movement.y = -1;
     }
 

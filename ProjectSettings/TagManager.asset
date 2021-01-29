@@ -19,7 +19,7 @@ TagManager:
   - 
   - FogOfWarMain
   - FogOfWarSecondary
-  - 
+  - VisorMask
   - 
   - 
   - 
@@ -47,4 +47,7 @@ TagManager:
     locked: 0
   - name: FogOfWar
     uniqueID: 3677767681
+    locked: 0
+  - name: VisorMask
+    uniqueID: 1322283273
     locked: 0
