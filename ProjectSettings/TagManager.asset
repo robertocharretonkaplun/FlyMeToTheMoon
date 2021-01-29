@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Spawneable
   - Crater
+  - LostItem
+  - Flag
+  - Particle
   layers:
   - Default
   - TransparentFX

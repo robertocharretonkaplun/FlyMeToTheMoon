@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class PlayerInventory : MonoBehaviour
 {
     //private Inventory playerInventory = new Inventory();
@@ -10,12 +11,11 @@ public class PlayerInventory : MonoBehaviour
 
     public GameObject playerInstance;
     public GameObject flagInstance;
+    public GameObject particleInstance;
 
     private GameObject objectCollition;
     private Inventory playerInventory;
-
-   
-
+    private GameObject aux;
 
     void Start()
     {
@@ -35,6 +35,8 @@ public class PlayerInventory : MonoBehaviour
             Destroy(objectCollition);
 
             playerInventory.takeFlag();
+            
+
             pickUpFlag = false;
         }
         else if (pickUpLostItem && Input.GetKeyDown(KeyCode.E))
@@ -51,7 +53,12 @@ public class PlayerInventory : MonoBehaviour
             Debug.Log("DroppedFlag");
             playerInventory.DropInstanceFlag(playerInstance.transform.position);
             playerInventory.dropFlag();
+            particleInstance.GetComponent<Renderer>().sortingLayerName = "Default";
+            aux = GameObject.Instantiate(particleInstance, playerInstance.transform.position - new Vector3(0.45f, 0.93f, 0), particleInstance.transform.rotation);
+            Destroy(aux, 1.5f);
         }
+
+        
     }
 
 
@@ -64,11 +71,6 @@ public class PlayerInventory : MonoBehaviour
             pickUpFlag = true;
             objectCollition = collision.gameObject;
         }
-        else if (collision.gameObject.CompareTag("LostItem"))
-        {
-            pickUpLostItem = true;
-            objectCollition = collision.gameObject;
-        }
     }
 
     private void OnCollisionExit2D(Collision2D collision)
@@ -78,10 +80,27 @@ public class PlayerInventory : MonoBehaviour
             pickUpFlag = false;
             objectCollition = null;
         }
-        else if (collision.gameObject.CompareTag("LostItem"))
+    }
+
+    //-------------------- triggers ---------------------/
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("LostItem"))
+        {
+            pickUpLostItem = true;
+            objectCollition = collision.gameObject;
+            Debug.Log("OnTriggerEnterLostItem");
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("LostItem"))
         {
             pickUpLostItem = false;
             objectCollition = null;
+            Debug.Log("OnTriggerExitLostItem");
         }
     }
+
 }
