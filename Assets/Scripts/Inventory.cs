@@ -12,7 +12,6 @@ public class Inventory
     public void setFlagInstance(GameObject newFlagInstance)
     {
         flagInstance = newFlagInstance;
-        Debug.Log("flagInstanced");
     }
 
 
