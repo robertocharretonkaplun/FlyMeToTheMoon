@@ -22,7 +22,7 @@ public class PlayerInventory : MonoBehaviour
         playerInventory = new Inventory();
         pickUpLostItem = false;
         pickUpFlag = false;
-        Debug.Log(playerInventory.getFlagsCount().ToString());
+        //Debug.Log(playerInventory.getFlagsCount().ToString());
 
         playerInventory.setFlagInstance(flagInstance);
     }
@@ -31,7 +31,7 @@ public class PlayerInventory : MonoBehaviour
     {
         if (pickUpFlag && Input.GetKeyDown(KeyCode.E)  )
         {
-            Debug.Log("FlagPicked");
+            //Debug.Log("FlagPicked");
             Destroy(objectCollition);
 
             playerInventory.takeFlag();
@@ -41,7 +41,7 @@ public class PlayerInventory : MonoBehaviour
         }
         else if (pickUpLostItem && Input.GetKeyDown(KeyCode.E))
         {
-            Debug.Log("LostItemPicked");
+            //Debug.Log("LostItemPicked");
             Destroy(objectCollition);
 
             playerInventory.takeLostItem();
@@ -50,7 +50,7 @@ public class PlayerInventory : MonoBehaviour
         else if(Input.GetKeyDown(KeyCode.Q) && playerInventory.getFlagsCount() > 0)
         {
             
-            Debug.Log("DroppedFlag");
+           // Debug.Log("DroppedFlag");
             playerInventory.DropInstanceFlag(playerInstance.transform.position);
             playerInventory.dropFlag();
             particleInstance.GetComponent<Renderer>().sortingLayerName = "Default";
@@ -89,7 +89,7 @@ public class PlayerInventory : MonoBehaviour
         {
             pickUpLostItem = true;
             objectCollition = collision.gameObject;
-            Debug.Log("OnTriggerEnterLostItem");
+            //Debug.Log("OnTriggerEnterLostItem");
         }
     }
 
@@ -99,7 +99,7 @@ public class PlayerInventory : MonoBehaviour
         {
             pickUpLostItem = false;
             objectCollition = null;
-            Debug.Log("OnTriggerExitLostItem");
+            //Debug.Log("OnTriggerExitLostItem");
         }
     }
 
