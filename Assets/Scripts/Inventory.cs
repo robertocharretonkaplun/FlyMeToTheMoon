@@ -7,10 +7,10 @@ public class Inventory
     private List<GameObject> lostItems;
     private List<GameObject> flags; 
 
-    private ushort lostItemsCount;      // How many lost items are remain to found
-    private ushort flagsCount;           //how many items are in inventory 
+    private int lostItemsCount;      // How many lost items are remain to found
+    private int flagsCount;           //how many items are in inventory 
 
-    Inventory()
+    public Inventory()
     {
         lostItems = new List<GameObject>();
         flags = new List<GameObject>();
@@ -35,18 +35,19 @@ public class Inventory
     public List<GameObject> getFlagList()  {
         return flags;
     }
-    public ushort getFlagsCount()   {
+    public int  getFlagsCount()   {
         return flagsCount;
     }
-    public ushort getlostItemsCount() {
+    public int  getlostItemsCount() {
         return lostItemsCount;
     }
 
     //------------------- setters --------------------//
-    public void setLostItemCount (ushort newLostItemCount)     { 
+
+    public void setLostItemCount (int newLostItemCount)     { 
         lostItemsCount = newLostItemCount;
     }
-    public void setFlagsCount(ushort newFlagCount)      { 
+    public void setFlagsCount(int newFlagCount)      { 
         flagsCount = newFlagCount;
     } 
 }
