@@ -7,7 +7,7 @@ public class CameraFollow : MonoBehaviour
   [Header("Camera Attributes")]
   public GameObject target;
   public Vector3 offset;
-  [Range(1, 10)]
+  [Range(1, 50)]
   public float smoothFactor;
   private void FixedUpdate() {
     follow();
