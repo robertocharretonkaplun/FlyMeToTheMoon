@@ -4,37 +4,40 @@ using UnityEngine;
 
 public class Inventory 
 {
-    private List<GameObject> lostItems;
-    private List<GameObject> flags; 
-
     private int lostItemsCount;      // How many lost items are remain to found
     private int flagsCount;           //how many items are in inventory 
 
+    private GameObject flagInstance;
+
+    public void setFlagInstance(GameObject newFlagInstance)
+    {
+        flagInstance = newFlagInstance;
+        Debug.Log("flagInstanced");
+    }
+
+
     public Inventory()
     {
-        lostItems = new List<GameObject>();
-        flags = new List<GameObject>();
         lostItemsCount = 0;              // start with 0 items spawned 
         flagsCount = 3;                  // start with flags that u can use
+
+        int rand = 10;                     //make it random
+        for (int i = 0; i < rand; i++)
+        {
+            //generate a random vec
+            //GameObject.Instantiate(GameObject.FindGameObjectWithTag("LostItem"),new Vector3(2, 2, 0), GameObject.FindGameObjectWithTag("LostItem").transform.rotation);
+            lostItemsCount++;
+        }
     }
 
-
-
-    public void AddLostItem(GameObject lostItem)    {
-        lostItems.Add(lostItem);
+    public void DropInstanceFlag(Vector3 droptoPos)
+    {
+        GameObject.Instantiate(flagInstance, droptoPos, flagInstance.transform.rotation);
     }
-    public void addFlagList(GameObject lostItem)    {
-        lostItems.Add(lostItem);
-    }
-
+    //Quaternion.identity
 
     //------------------- getters ------------------------//
-    public List<GameObject> getLostItemsList()  {
-        return lostItems;
-    }
-    public List<GameObject> getFlagList()  {
-        return flags;
-    }
+
     public int  getFlagsCount()   {
         return flagsCount;
     }
@@ -44,10 +47,17 @@ public class Inventory
 
     //------------------- setters --------------------//
 
-    public void setLostItemCount (int newLostItemCount)     { 
-        lostItemsCount = newLostItemCount;
+    public void takeFlag()
+    {
+        flagsCount++;
     }
-    public void setFlagsCount(int newFlagCount)      { 
-        flagsCount = newFlagCount;
-    } 
+    public void dropFlag()
+    {
+        flagsCount--;
+    }
+    public void takeLostItem()
+    {
+        lostItemsCount--;
+    }
+
 }

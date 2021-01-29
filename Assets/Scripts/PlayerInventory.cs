@@ -8,57 +8,79 @@ public class PlayerInventory : MonoBehaviour
     private bool pickUpLostItem;
     private bool pickUpFlag;
 
-    GameObject objectCollition;
+    public GameObject playerInstance;
+    public GameObject flagInstance;
 
-    // Start is called before the first frame update
+    private GameObject objectCollition;
+    private Inventory playerInventory;
+
+   
+
+
     void Start()
     {
+        playerInventory = new Inventory();
         pickUpLostItem = false;
         pickUpFlag = false;
+        Debug.Log(playerInventory.getFlagsCount().ToString());
+
+        playerInventory.setFlagInstance(flagInstance);
     }
 
-    // Update is called once per frame
     void Update()
     {
-
-        if (pickUpFlag && Input.GetKeyDown(KeyCode.E))
+        if (pickUpFlag && Input.GetKeyDown(KeyCode.E)  )
         {
             Debug.Log("FlagPicked");
             Destroy(objectCollition);
+
+            playerInventory.takeFlag();
+            pickUpFlag = false;
         }
-        if (pickUpLostItem && Input.GetKeyDown(KeyCode.E))
+        else if (pickUpLostItem && Input.GetKeyDown(KeyCode.E))
         {
             Debug.Log("LostItemPicked");
             Destroy(objectCollition);
+
+            playerInventory.takeLostItem();
+            pickUpLostItem = false;
+        }
+        else if(Input.GetKeyDown(KeyCode.Q) && playerInventory.getFlagsCount() > 0)
+        {
+            
+            Debug.Log("DroppedFlag");
+            playerInventory.DropInstanceFlag(playerInstance.transform.position);
+            playerInventory.dropFlag();
         }
     }
+
+
+
+    //-------------- collisions -----------------//
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.name.Equals("flag"))
+        if (collision.gameObject.CompareTag("Flag"))
         {
             pickUpFlag = true;
             objectCollition = collision.gameObject;
         }
-        if (collision.gameObject.name.Equals("itemLost"))
+        else if (collision.gameObject.CompareTag("LostItem"))
         {
             pickUpLostItem = true;
-            Debug.Log("ItemLost is True");
             objectCollition = collision.gameObject;
         }
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.name.Equals("flag"))
+        if (collision.gameObject.CompareTag("Flag"))
         {
             pickUpFlag = false;
-            Debug.Log("Flag is False");
             objectCollition = null;
         }
-        else if (collision.gameObject.name.Equals("ItemLost"))
+        else if (collision.gameObject.CompareTag("LostItem"))
         {
             pickUpLostItem = false;
-            Debug.Log("ItemLost is False");
             objectCollition = null;
         }
     }
