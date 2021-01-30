@@ -15,14 +15,26 @@ public class SpriteFloat : MonoBehaviour
 
     bool CheckRenderers()
     {
+        for (int i = 0; i < 1000; i++)
+        {
+            Debug.Log(i);
+            if (renderers[i] == null)
+            {
+                return true;
+            }
+            Debug.Log(i);
+        }
         foreach (Renderer renderer in renderers)
         {
             if (renderer.isVisible)
             {
+                Debug.Log(renderer.isVisible.ToString());
                 return true;
             }
+            Debug.Log(renderer.isVisible.ToString());
         }
 
+        
         return false;
     }
 
@@ -48,14 +60,15 @@ public class SpriteFloat : MonoBehaviour
         
         if (!isWrappingX && (viewportPosition.x > 1 || viewportPosition.x < 0))
         {
+            Debug.Log("Cambie");
             newPosition.x = -newPosition.x;
             isWrappingX = true;
         }
 
         if (!isWrappingY && (viewportPosition.y > 1 || viewportPosition.y < 0))
         {
+            Debug.Log("Cambie");
             newPosition.y = -newPosition.y;
-
             isWrappingY = true;
         }
 
