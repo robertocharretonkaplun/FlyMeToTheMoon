@@ -25,8 +25,9 @@ public class PlayerInventory : MonoBehaviour
         //Debug.Log(playerInventory.getFlagsCount().ToString());
 
         playerInventory.setFlagInstance(flagInstance);
+        
     }
-
+    
     void Update()
     {
         if (pickUpFlag && Input.GetKeyDown(KeyCode.E)  )

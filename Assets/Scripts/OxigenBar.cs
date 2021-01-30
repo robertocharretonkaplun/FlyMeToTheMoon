@@ -8,18 +8,20 @@ public class OxigenBar : MonoBehaviour
     public float oxigen;
     public float oxigenCapcity;
     public Image fillImage;
-    private Slider slider;
+    public Slider slider;
 
+    public Player playerInstance;
     // Start is called before the first frame update
     void Start()
     {
-        slider = GetComponent<Slider>(); // search for the slider component and make a reference
+        playerInstance.setRechargeOxigen(false);
+        //slider = GetComponent<Slider>(); // search for the slider component and make a reference
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        
         if (slider.value <= slider.minValue)
         {
             fillImage.enabled = false;
@@ -28,15 +30,16 @@ public class OxigenBar : MonoBehaviour
         {
             fillImage.enabled = true;
         }
-        if (oxigen > 1)
+
+        if(playerInstance.getRechregeOxigen())
         {
-            oxigen -= Time.deltaTime;
+            ChargeOxigen();
         }
-        else if (oxigen <= 1)
+        else
         {
-            oxigen -= (Time.deltaTime * 0.8f);
+            UnChargeOxigen();
         }
-        
+
         float fillvalue = oxigen / oxigenCapcity;
         slider.value = fillvalue;
 
@@ -48,7 +51,31 @@ public class OxigenBar : MonoBehaviour
         {
             //fillImage.color = Color.white; //set a color
         }
-            
     }
+
+
+
+    private void UnChargeOxigen()
+    {
+        if (oxigen > 1)
+        {
+            oxigen -= Time.deltaTime;
+        }
+        else if (oxigen <= 1 && oxigen > 0)
+        {
+            oxigen -= (Time.deltaTime * 0.8f);
+
+        }
+    }
+
+    private void ChargeOxigen()
+    {
+        if (oxigen < oxigenCapcity)
+        {
+            oxigen += Time.deltaTime;
+        }
+    }
+
+
 
 }

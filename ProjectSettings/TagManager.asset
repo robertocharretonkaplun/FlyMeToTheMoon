@@ -8,6 +8,8 @@ TagManager:
   - Crater
   - LostItem
   - Flag
+  - Particle
+  - Dome
   layers:
   - Default
   - TransparentFX
