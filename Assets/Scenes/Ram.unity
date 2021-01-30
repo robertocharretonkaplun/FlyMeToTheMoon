@@ -526,12 +526,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecbcd0dff0f5c4948b7e0ba0839b7e76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  g_numberToGears: 5
+  g_numberToGears: 10
   g_numberToCraters: 10
   g_elementToSpawn:
-  - {fileID: 4362360347291013113, guid: 7b4b510cac6e9ad4cb0296dc5ddbd5c3, type: 3}
-  - {fileID: 1387765971924289477, guid: 8e7c85bdf6b4eae4ba420aa055aa7665, type: 3}
+  - {fileID: 8469935019522190455, guid: 0d628280c97ca7f4cb8dbda72f4d679b, type: 3}
+  - {fileID: 7822026106686901400, guid: 3aeb39edb5360d9458dec5556a5ad4b6, type: 3}
   g_field: {fileID: 2049657975}
+  g_colliders: []
+  g_radius: 15
 --- !u!1 &1974963107
 GameObject:
   m_ObjectHideFlags: 0

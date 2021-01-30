@@ -8,6 +8,9 @@ public class spawn : MonoBehaviour
     public int g_numberToCraters;
     public List<GameObject> g_elementToSpawn;
     public GameObject g_field;
+    public Collider2D[] g_colliders;
+    public float g_radius;
+
 
     void Start()
     {
@@ -20,10 +23,9 @@ public class spawn : MonoBehaviour
         //Restart the field
         destroyObjects();
 
+        int total = g_numberToCraters + g_numberToGears;
         //Cicle for gears
-        cicleForItems(g_numberToCraters);
-        //Cicle for craters
-        cicleForItems(g_numberToCraters);
+        cicleForItems(total);
     }
 
     //Call this function if you want show a N number of items in screen
@@ -32,11 +34,13 @@ public class spawn : MonoBehaviour
         int randomItem = 0;
         float screenX, screenY;
 
-        Vector2 position;
-        GameObject toSpawn;
+        Vector2 position = new Vector2(0, 0);
+        GameObject toSpawn = new GameObject();
         MeshCollider collider = g_field.GetComponent<MeshCollider>();
 
-        for (int i = 0; i <numberOf; ++i)
+        bool canSpawnHere = false;
+
+        for (int i = 0; i < numberOf; ++i)
         {
             randomItem = Random.Range(0, g_elementToSpawn.Count);
             toSpawn = g_elementToSpawn[randomItem];
@@ -45,6 +49,26 @@ public class spawn : MonoBehaviour
             screenY = Random.Range(collider.bounds.min.y, collider.bounds.max.y);
 
             position = new Vector2(screenX, screenY);
+
+            canSpawnHere = PreventSpawnOverlap(position);
+
+            if (!canSpawnHere)
+            {
+                while (!canSpawnHere)
+                {
+                    screenX = Random.Range(collider.bounds.min.x, collider.bounds.max.x);
+                    screenY = Random.Range(collider.bounds.min.y, collider.bounds.max.y);
+
+                    position = new Vector2(screenX, screenY);
+
+                    canSpawnHere = PreventSpawnOverlap(position);
+
+                    if (canSpawnHere)
+                    {
+                        break;
+                    }
+                }
+            }
 
             Instantiate(toSpawn, position, toSpawn.transform.rotation);
         }
@@ -56,5 +80,32 @@ public class spawn : MonoBehaviour
         {
             Destroy(o);
         }
+    }
+
+    bool PreventSpawnOverlap(Vector2 position)
+    {
+        g_colliders = Physics2D.OverlapCircleAll(transform.position, g_radius);
+
+        for (int i = 0; i < g_colliders.Length; i++)
+        {
+            Vector2 centerPoint = g_colliders[i].bounds.center;
+            float width = g_colliders[i].bounds.extents.x;
+            float height = g_colliders[i].bounds.extents.y;
+            float leftExtent = centerPoint.x - width;
+            float rightExtent = centerPoint.x + width;
+            float lowerExtent = centerPoint.y - height;
+            float upperExtent = centerPoint.y + height;
+
+            if ((position.x >= leftExtent) && 
+                (position.x <= rightExtent))
+            {
+                if ((position.y >= lowerExtent) &&
+                    (position.y <= upperExtent)) 
+                {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }
