@@ -5,12 +5,18 @@ using UnityEngine.UI;
 
 public class OxigenBar : MonoBehaviour
 {
+    [SerializeField]        //Tiene que existir, eso es lo que hace el [serializedField] - es un input field
     public float oxigen;
+    [SerializeField]
     public float oxigenCapcity;
+    [SerializeField]
     public Image fillImage;
-    public Slider slider;
+    [SerializeField]
+    public GameObject slider;
 
+    [SerializeField]
     public Player playerInstance;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,12 +27,13 @@ public class OxigenBar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        if (slider.value <= slider.minValue)
+        var sliderbar = slider.GetComponent<Slider>();
+
+        if (sliderbar.value <= sliderbar.minValue)
         {
             fillImage.enabled = false;
         }
-        if (slider.value > slider.minValue && !fillImage.enabled)
+        if (sliderbar.value > sliderbar.minValue && !fillImage.enabled)
         {
             fillImage.enabled = true;
         }
@@ -41,15 +48,21 @@ public class OxigenBar : MonoBehaviour
         }
 
         float fillvalue = oxigen / oxigenCapcity;
-        slider.value = fillvalue;
+        sliderbar.value = fillvalue;
 
-        if(fillvalue <= slider.maxValue / 3)
+        if(fillvalue <= sliderbar.maxValue / 3)
         {
             //fillImage.color = Color.white; //set a color
         }
-        else if (fillvalue > slider.maxValue / 3)
+        else if (fillvalue > sliderbar.maxValue / 3)
         {
             //fillImage.color = Color.white; //set a color
+        }
+
+
+        if (oxigen < 0)
+        {
+            playerInstance.Looser();
         }
     }
 
@@ -64,7 +77,6 @@ public class OxigenBar : MonoBehaviour
         else if (oxigen <= 1 && oxigen > 0)
         {
             oxigen -= (Time.deltaTime * 0.8f);
-
         }
     }
 

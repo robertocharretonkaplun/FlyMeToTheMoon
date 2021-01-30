@@ -6,11 +6,14 @@ public class Player : MonoBehaviour
 {
 
     public bool RechargeOxigen;
+    private bool Win;
+    private bool Loose;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        Win = false;
+        Loose = true;
     }
 
     // Update is called once per frame
@@ -21,7 +24,7 @@ public class Player : MonoBehaviour
 
 
 
-
+    
 
     //------------------ triggers -----------------//
     private void OnTriggerEnter2D(Collider2D collision)
@@ -29,6 +32,7 @@ public class Player : MonoBehaviour
         if (collision.gameObject.CompareTag("Dome"))
         {
             RechargeOxigen = true;
+            Debug.Log(RechargeOxigen.ToString());
         }
     }
     
@@ -37,10 +41,16 @@ public class Player : MonoBehaviour
         if (collision.gameObject.CompareTag("Dome"))
         {
             RechargeOxigen = false;
+            Debug.Log(RechargeOxigen.ToString());
+
         }
     }
 
 
     public void setRechargeOxigen(bool yesNo) { RechargeOxigen = yesNo; }
     public bool getRechregeOxigen() { return RechargeOxigen; }
+
+    public void Winner() { Win = true; }
+    public void Looser() { Loose = true; }
+
 }
