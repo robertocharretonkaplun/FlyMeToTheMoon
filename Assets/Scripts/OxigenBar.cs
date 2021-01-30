@@ -5,88 +5,90 @@ using UnityEngine.UI;
 
 public class OxigenBar : MonoBehaviour
 {
-    [SerializeField]        //Tiene que existir, eso es lo que hace el [serializedField] - es un input field
-    public float oxigen;
-    [SerializeField]
-    public float oxigenCapcity;
-    [SerializeField]
-    public Image fillImage;
-    [SerializeField]
-    public GameObject slider;
+  [SerializeField]        //Tiene que existir, eso es lo que hace el [serializedField] - es un input field
+  public float oxigen;
+  [SerializeField]
+  public float oxigenCapcity;
+  [SerializeField]
+  public Image fillImage;
+  [SerializeField]
+  public GameObject slider;
+  [SerializeField]
+  public ProgressBar oxigenBar;
+  [SerializeField]
+  public Player playerInstance;
 
-    [SerializeField]
-    public Player playerInstance;
+  // Start is called before the first frame update
+  void Start()
+  {
+    oxigenBar.minimum = oxigenCapcity;
+    oxigenBar.minimum = oxigenCapcity;
+    //slider = GetComponent<Slider>(); // search for the slider component and make a reference
+  }
 
-    // Start is called before the first frame update
-    void Start()
+  // Update is called once per frame
+  void Update()
+  {
+    var sliderbar = slider.GetComponent<Slider>();
+
+    if (sliderbar.value <= sliderbar.minValue)
     {
-        playerInstance.setRechargeOxigen(false);
-        //slider = GetComponent<Slider>(); // search for the slider component and make a reference
+      fillImage.enabled = false;
+    }
+    if (sliderbar.value > sliderbar.minValue && !fillImage.enabled)
+    {
+      fillImage.enabled = true;
     }
 
-    // Update is called once per frame
-    void Update()
+    if (playerInstance.getRechregeOxigen())
     {
-        var sliderbar = slider.GetComponent<Slider>();
+      ChargeOxigen();
+    }
+    else
+    {
+      UnChargeOxigen();
+    }
 
-        if (sliderbar.value <= sliderbar.minValue)
-        {
-            fillImage.enabled = false;
-        }
-        if (sliderbar.value > sliderbar.minValue && !fillImage.enabled)
-        {
-            fillImage.enabled = true;
-        }
-
-        if(playerInstance.getRechregeOxigen())
-        {
-            ChargeOxigen();
-        }
-        else
-        {
-            UnChargeOxigen();
-        }
-
-        float fillvalue = oxigen / oxigenCapcity;
-        sliderbar.value = fillvalue;
-
-        if(fillvalue <= sliderbar.maxValue / 3)
-        {
-            //fillImage.color = Color.white; //set a color
-        }
-        else if (fillvalue > sliderbar.maxValue / 3)
-        {
-            //fillImage.color = Color.white; //set a color
-        }
-
-
-        if (oxigen < 0)
-        {
-            playerInstance.Looser();
-        }
+    float fillvalue = oxigen / oxigenCapcity;
+    sliderbar.value = fillvalue;
+    oxigenBar.current = oxigen;
+    if (fillvalue <= sliderbar.maxValue / 3)
+    {
+      //fillImage.color = Color.white; //set a color
+    }
+    else if (fillvalue > sliderbar.maxValue / 3)
+    {
+      //fillImage.color = Color.white; //set a color
     }
 
 
-
-    private void UnChargeOxigen()
+    if (oxigen < 0)
     {
-        if (oxigen > 1)
-        {
-            oxigen -= Time.deltaTime;
-        }
-        else if (oxigen <= 1 && oxigen > 0)
-        {
-            oxigen -= (Time.deltaTime * 0.8f);
-        }
+      playerInstance.Looser();
     }
+  }
 
-    private void ChargeOxigen()
+
+
+  private void UnChargeOxigen()
+  {
+    if (oxigen > 1)
     {
-        if (oxigen < oxigenCapcity)
-        {
-            oxigen += Time.deltaTime;
-        }
+      oxigen -= Time.deltaTime;
     }
+    else if (oxigen <= 1 && oxigen > 0)
+    {
+      oxigen -= (Time.deltaTime * 0.8f);
+    }
+  }
+
+  private void ChargeOxigen()
+  {
+    if (oxigen < oxigenCapcity)
+    {
+      oxigen += Time.deltaTime;
+    }
+  }
 
 
 
