@@ -174,7 +174,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e567abfa2ff0e6429750498e4d29477, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 1
+  moveSpeed: 50
   horizontalFall: -0.5
   rigidBody: {fileID: 118418685}
 --- !u!50 &118418685
@@ -485,7 +485,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e567abfa2ff0e6429750498e4d29477, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 1
+  moveSpeed: 50
   horizontalFall: -0.1
   rigidBody: {fileID: 559253920}
 --- !u!50 &559253920
@@ -598,7 +598,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e567abfa2ff0e6429750498e4d29477, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 1
+  moveSpeed: 50
   horizontalFall: -1
   rigidBody: {fileID: 625336653}
 --- !u!50 &625336653
@@ -856,7 +856,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e567abfa2ff0e6429750498e4d29477, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 1
+  moveSpeed: 50
   horizontalFall: -0.2
   rigidBody: {fileID: 829502841}
 --- !u!50 &829502841
@@ -1437,7 +1437,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e567abfa2ff0e6429750498e4d29477, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 1
+  moveSpeed: 50
   horizontalFall: -0.8
   rigidBody: {fileID: 1923404528}
 --- !u!50 &1923404528
@@ -1907,7 +1907,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e567abfa2ff0e6429750498e4d29477, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 1
+  moveSpeed: 50
   horizontalFall: -0.3
   rigidBody: {fileID: 2131682400}
 --- !u!50 &2131682400

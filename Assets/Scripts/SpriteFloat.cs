@@ -9,68 +9,33 @@ public class SpriteFloat : MonoBehaviour
     public Rigidbody2D rigidBody;
     Vector2 movement;
 
-    private Renderer[] renderers;
-    private bool isWrappingX = false;
-    private bool isWrappingY = false;
-
-    bool CheckRenderers()
-    {
-        for (int i = 0; i < 1000; i++)
-        {
-            Debug.Log(i);
-            if (renderers[i] == null)
-            {
-                return true;
-            }
-            Debug.Log(i);
-        }
-        foreach (Renderer renderer in renderers)
-        {
-            if (renderer.isVisible)
-            {
-                Debug.Log(renderer.isVisible.ToString());
-                return true;
-            }
-            Debug.Log(renderer.isVisible.ToString());
-        }
-
-        
-        return false;
-    }
 
     void ScreenWrap()
-    {
-        var isVisible = CheckRenderers();
-
-        if (isVisible)
-        {
-            isWrappingX = false;
-            isWrappingY = false;
-            return;
-        }
-
-        if (isWrappingX && isWrappingY)
-        {
-            return;
-        }
-
+    {        
         var cam = Camera.main;
         var viewportPosition = cam.WorldToViewportPoint(rigidBody.position);
         var newPosition = rigidBody.position;
-        
-        if (!isWrappingX && (viewportPosition.x > 1 || viewportPosition.x < 0))
+
+        if (viewportPosition.x > 1)
         {
-            Debug.Log("Cambie");
-            newPosition.x = -newPosition.x;
-            isWrappingX = true;
+            //newPosition.x = -newPosition.x + 0.1f;
         }
 
-        if (!isWrappingY && (viewportPosition.y > 1 || viewportPosition.y < 0))
+        if (viewportPosition.x < 0)
         {
-            Debug.Log("Cambie");
-            newPosition.y = -newPosition.y;
-            isWrappingY = true;
+            newPosition.x = -newPosition.x - 0.1f;
         }
+
+        if (viewportPosition.y > 1)
+        {
+            //newPosition.y = -newPosition.y + 0.1f;
+        }
+
+        if (viewportPosition.y < 0)
+        {
+            newPosition.y = -newPosition.y - 0.1f;
+        }
+
 
         transform.position = newPosition;
     }
@@ -78,7 +43,6 @@ public class SpriteFloat : MonoBehaviour
     void Start()
     {
         rigidBody = GetComponent<Rigidbody2D>();
-        renderers = GetComponentsInChildren<Renderer>(); 
     }
 
     // Update is called once per frame
@@ -86,6 +50,7 @@ public class SpriteFloat : MonoBehaviour
     {        
         movement.x = horizontalFall;
         movement.y = -1;
+        ScreenWrap();
     }
 
     void FixedUpdate()
@@ -93,7 +58,5 @@ public class SpriteFloat : MonoBehaviour
         rigidBody.velocity = new Vector2(rigidBody.velocity.x, rigidBody.velocity.y);
         rigidBody.MovePosition(rigidBody.position + movement * moveSpeed * Time.fixedDeltaTime);
         rigidBody.transform.Rotate(0, 0, 3, Space.Self);
-
-        ScreenWrap();
-    }    
+    }
 }
