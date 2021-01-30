@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
   private bool Win;
   private bool Loose;
 
+  public GameObject loseScreen;
   // Start is called before the first frame update
   void Start()
   {
@@ -21,6 +22,9 @@ public class Player : MonoBehaviour
   void Update()
   {
 
+    if (!Loose) {
+      loseScreen.SetActive(true);
+    }
   }
 
 

@@ -5,13 +5,24 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    public void PlayGame()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-    }
+  public GameObject pauseMenu;
+  public void PlayGame()
+  {
+    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+  }
 
-    public void QuitGame()
-    {
-        Application.Quit();
-    }
+  public void ActivateMenu()
+  {
+    pauseMenu.SetActive(true);
+  }
+
+  public void GoToMenu()
+  {
+    SceneManager.LoadScene("Main Menu");
+  }
+
+  public void QuitGame()
+  {
+    Application.Quit();
+  }
 }

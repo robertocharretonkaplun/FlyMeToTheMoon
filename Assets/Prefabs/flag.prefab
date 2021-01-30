@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7894167109698321581}
   - component: {fileID: 3124333260614010575}
   - component: {fileID: 1979181357423645344}
+  - component: {fileID: -2063729053672985978}
   m_Layer: 0
   m_Name: flag
   m_TagString: Flag
@@ -28,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4636513388380848613}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -3}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
   m_LocalScale: {x: 0.32, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -4891,3 +4892,15 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &-2063729053672985978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4636513388380848613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e305cb88688aa1e4eb8e765c7b84f437, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

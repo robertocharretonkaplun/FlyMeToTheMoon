@@ -17,7 +17,7 @@ public class OxigenBar : MonoBehaviour
   public ProgressBar oxigenBar;
   [SerializeField]
   public Player playerInstance;
-
+  public GameObject loseScreen;
   // Start is called before the first frame update
   void Start()
   {
@@ -64,6 +64,7 @@ public class OxigenBar : MonoBehaviour
 
     if (oxigen < 0)
     {
+      loseScreen.SetActive(true);
       playerInstance.Looser();
     }
   }

@@ -2,61 +2,59 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Inventory 
+public class Inventory
 {
-    private int lostItemsCount;      // How many lost items are remain to found
-    private int flagsCount;           //how many items are in inventory 
+  public int lostItemsCount;      // How many lost items are remain to found
+  private int flagsCount;           //how many items are in inventory 
 
-    private GameObject flagInstance;
+  private GameObject flagInstance;
 
-    public void setFlagInstance(GameObject newFlagInstance)
-    {
-        flagInstance = newFlagInstance;
-    }
+  
+  public void setFlagInstance(GameObject newFlagInstance)
+  {
+    flagInstance = newFlagInstance;
+  }
 
 
-    public Inventory()
-    {
-        lostItemsCount = 0;              // start with 0 items spawned 
-        flagsCount = 3;                  // start with flags that u can use
+  public Inventory()
+  {
+    //lostItemsCount = spawner.g_numberToGears;              // start with 0 items spawned 
+    flagsCount = 3;                  // start with flags that u can use
 
-        int rand = 10;                     //make it random
-        for (int i = 0; i < rand; i++)
-        {
-            //generate a random vec
-            //GameObject.Instantiate(GameObject.FindGameObjectWithTag("LostItem"),new Vector3(2, 2, 0), GameObject.FindGameObjectWithTag("LostItem").transform.rotation);
-            lostItemsCount++;
-        }
-    }
+    int rand = 10;                     //make it random
+    
+  }
 
-    public void DropInstanceFlag(Vector3 droptoPos)
-    {
-        GameObject.Instantiate(flagInstance, droptoPos, flagInstance.transform.rotation);
-    }
-    //Quaternion.identity
+  public void DropInstanceFlag(Vector3 droptoPos)
+  {
+    GameObject.Instantiate(flagInstance, droptoPos, flagInstance.transform.rotation);
+  }
+  //Quaternion.identity
 
-    //------------------- getters ------------------------//
+  //------------------- getters ------------------------//
 
-    public int  getFlagsCount()   {
-        return flagsCount;
-    }
-    public int  getlostItemsCount() {
-        return lostItemsCount;
-    }
+  public int getFlagsCount()
+  {
+    return flagsCount;
+  }
+  public int getlostItemsCount()
+  {
+    return lostItemsCount;
+  }
 
-    //------------------- setters --------------------//
+  //------------------- setters --------------------//
 
-    public void takeFlag()
-    {
-        flagsCount++;
-    }
-    public void dropFlag()
-    {
-        flagsCount--;
-    }
-    public void takeLostItem()
-    {
-        lostItemsCount--;
-    }
+  public void takeFlag()
+  {
+    flagsCount++;
+  }
+  public void dropFlag()
+  {
+    flagsCount--;
+  }
+  public void takeLostItem()
+  {
+    lostItemsCount--;
+  }
 
 }
