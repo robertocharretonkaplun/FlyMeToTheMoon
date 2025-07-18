@@ -55,7 +55,7 @@ public class SpriteFloat : MonoBehaviour
 
     void FixedUpdate()
     {
-        rigidBody.velocity = new Vector2(rigidBody.velocity.x, rigidBody.velocity.y);
+        rigidBody.linearVelocity = new Vector2(rigidBody.linearVelocity.x, rigidBody.linearVelocity.y);
         rigidBody.MovePosition(rigidBody.position + movement * moveSpeed * Time.fixedDeltaTime);
         rigidBody.transform.Rotate(0, 0, 3, Space.Self);
     }

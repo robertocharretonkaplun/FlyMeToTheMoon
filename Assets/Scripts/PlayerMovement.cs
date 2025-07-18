@@ -52,7 +52,7 @@ public class PlayerMovement : MonoBehaviour
 
   void FixedUpdate()
   {
-    rigidBody.velocity = new Vector2(rigidBody.velocity.x, rigidBody.velocity.y);
+    rigidBody.linearVelocity = new Vector2(rigidBody.linearVelocity.x, rigidBody.linearVelocity.y);
     rigidBody.MovePosition(rigidBody.position + movement * moveSpeed * Time.fixedDeltaTime);
   }
 
